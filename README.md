@@ -1,84 +1,87 @@
-# Lab 19: Azure App Service (PaaS) 
+# Lab 19 – Azure App Service (PaaS) – Despliegue básico y verificación
 
 ## Objetivo
-Desplegar una aplicación web usando Azure App Service (PaaS) para reducir la gestión de servidores (sistema operativo, parches, IIS, etc.) y centrarse en la aplicación.
+Desplegar una aplicación web en Azure App Service (PaaS) para publicar un endpoint web sin gestionar máquinas virtuales, sistema operativo ni parches.
+
+El objetivo es simular un escenario real donde se necesita exponer una web rápidamente y de forma gestionada, utilizando el dominio por defecto `*.azurewebsites.net`.
 
 ---
 
-## Escenario
-Necesito publicar una web rápidamente sin crear máquinas virtuales. Creo un App Service con runtime .NET (o el que elija) y verifico que responde con la página por defecto en el dominio `*.azurewebsites.net`.
+## Qué he hecho en este laboratorio
+
+1. He creado un App Service (Web App) en Azure.
+2. He creado un App Service Plan asociado (capacidad y coste).
+3. He seleccionado Runtime Stack .NET.
+4. He validado el funcionamiento accediendo a la URL pública `*.azurewebsites.net` y comprobando que carga la página de bienvenida por defecto.
 
 ---
 
-## Servicios utilizados
-- Azure App Service
-- App Service Plan
+## Arquitectura y concepto
+
+En App Service el despliegue se apoya en dos elementos:
+
+- App Service (Web App): el recurso donde vive la aplicación (configuración, URL, runtime).
+- App Service Plan: la capacidad sobre la que corre la app (SKU, CPU/RAM, escalado) y donde se define el coste.
+
+Este enfoque PaaS permite publicar una web sin administrar el sistema operativo ni el servidor web, reduciendo la carga operativa y acelerando el despliegue.
 
 ---
 
-## Pasos realizados (paso a paso)
+## Configuración utilizada
 
-### 1) Crear el App Service
-Ruta: Azure Portal → App Services → Create
-
-1. Seleccionar la suscripción y el grupo de recursos del laboratorio.
-2. Name: por ejemplo `app-lab19-01` (esto define la URL `https://app-lab19-01.azurewebsites.net`).
-3. Publish: Code.
-4. Runtime stack: .NET (o el que quieras).
-5. Operating System: Windows o Linux (cualquiera vale para este lab).
-6. Region: la que estés usando para tus labs.
-7. App Service Plan: elegir el plan más económico disponible en tu suscripción (si existe Free/Shared/Basic, seleccionar el más barato).
-8. Crear el recurso.
-
-Captura 1: En el App Service recién creado → Overview (Información general). Debe verse:
-- Nombre del App Service
-- Estado (Running)
-- URL `https://<nombre>.azurewebsites.net`
-- Región y Resource Group (si aparece en “Essentials”)
-
-Guardar como: `images/01-appservice-overview.png`
+- Región: AS
+- App Service: `app-lab19-antonio-01`
+- App Service Plan: `asp-lab19-antonio-01`
+- Runtime Stack: `.NET`
+- Endpoint por defecto: `https://app-lab19-antonio-01.azurewebsites.net`
 
 ---
 
-### 2) Verificar la web (Browse)
-1. Dentro del App Service, pulsar Browse (o abrir manualmente la URL).
-2. Comprobar que aparece la página de bienvenida por defecto y que carga correctamente.
+## Validación funcional
 
-Captura 2: En el navegador, con la página de bienvenida funcionando y la barra de direcciones visible con `https://<nombre>.azurewebsites.net`.
+Se ha verificado que la web responde correctamente accediendo a la URL por defecto del App Service y visualizando la página de bienvenida.
 
-Guardar como: `images/02-azurewebsites-welcome.png`
-
----
-
-## Evidencias (capturas)
-Click en la imagen para ampliarla.
-
-[<img src="images/01-appservice-overview.png" width="800">](images/01-appservice-overview.png)
-
-[<img src="images/02-azurewebsites-welcome.png" width="800">](images/02-azurewebsites-welcome.png)
+Esto confirma que:
+- El App Service está creado y operativo.
+- El endpoint público es accesible.
+- El runtime está preparado para despliegues posteriores (Zip Deploy, GitHub Actions, etc.).
 
 ---
 
-## Verificación (completado)
-- El App Service está creado y en estado Running.
-- La URL `https://<appname>.azurewebsites.net` abre correctamente.
-- Las evidencias están guardadas con el naming del lab.
+## Evidencias
+
+### 01 – App Service creado (Overview)
+<img src="images/01-appservice-overview.png" width="800">
+
+Se muestra el panel del App Service, con el estado del servicio y la URL `*.azurewebsites.net`.
 
 ---
 
-## Notas prácticas
-- El App Service Plan define el coste y capacidades (CPU/RAM/funcionalidades). No es solo “el App Service”.
-- Con PaaS no gestionas el sistema operativo, pero sí la configuración de la app (Application settings), despliegue y diagnóstico (logs).
-- El dominio `azurewebsites.net` es el endpoint por defecto. En producción se suele usar dominio propio y TLS.
+### 02 – Web accesible desde `azurewebsites.net`
+<img src="images/02-azurewebsites-welcome.png" width="800">
+
+Se muestra la página de bienvenida funcionando, accediendo al endpoint público por defecto del App Service.
 
 ---
 
-## Qué diría en entrevista
-“Uso App Service cuando quiero desplegar una web sin administrar servidores. Así reduzco mantenimiento (parches/SO) y me centro en la aplicación. El coste y las capacidades dependen del App Service Plan y del nivel (SKU).”
+## Checklist de verificación
+
+- [x] App Service creado correctamente
+- [x] App Service Plan creado y asociado
+- [x] Runtime Stack configurado (.NET)
+- [x] El App Service está en estado Running
+- [x] La URL `*.azurewebsites.net` responde y carga la página de bienvenida
+- [x] Evidencias guardadas y enlazadas en el README
+
+---
+
+## Qué le diría a un cliente o en entrevista
+
+“Uso App Service cuando quiero desplegar una web sin administrar servidores. Azure gestiona el sistema operativo y el runtime, y yo me centro en la aplicación. El coste y capacidades dependen del App Service Plan, y puedo escalar o automatizar despliegues con pipelines.”
 
 ---
 
 ## Limpieza (para evitar costes)
-- Eliminar el App Service si no lo necesitas.
-- Si el App Service Plan no se reutiliza, eliminar también el App Service Plan.
-- Si está todo dentro de un grupo de recursos del lab, borrar el Resource Group completo.
+- Eliminar el App Service si no se va a reutilizar.
+- Si el App Service Plan no se comparte con otros servicios, eliminarlo también.
+- Si todo está dentro de un Resource Group exclusivo del lab, borrar el Resource Group completo.
