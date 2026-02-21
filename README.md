@@ -80,8 +80,3 @@ Se muestra la página de bienvenida funcionando, accediendo al endpoint público
 “Uso App Service cuando quiero desplegar una web sin administrar servidores. Azure gestiona el sistema operativo y el runtime, y yo me centro en la aplicación. El coste y capacidades dependen del App Service Plan, y puedo escalar o automatizar despliegues con pipelines.”
 
 ---
-
-## Limpieza (para evitar costes)
-- Eliminar el App Service si no se va a reutilizar.
-- Si el App Service Plan no se comparte con otros servicios, eliminarlo también.
-- Si todo está dentro de un Resource Group exclusivo del lab, borrar el Resource Group completo.
