@@ -29,11 +29,11 @@ Este enfoque PaaS permite publicar una web sin administrar el sistema operativo 
 
 ## Configuración utilizada
 
-- Región: AS
+- Región: Canada Central
 - App Service: `app-lab19-antonio-01`
-- App Service Plan: `asp-lab19-antonio-01`
-- Runtime Stack: `.NET`
-- Endpoint por defecto: `https://app-lab19-antonio-01.azurewebsites.net`
+- App Service Plan: `ASP-Laboratorios-970a`
+- Runtime Stack: `Dotnet v8.0`
+- Endpoint por defecto: `app-lab19-antonio-01-ecaua9habpgqeham.canadacentral-01.azurewebsites.net`
 
 ---
 
@@ -71,7 +71,7 @@ Se muestra la página de bienvenida funcionando, accediendo al endpoint público
 - [x] Runtime Stack configurado (.NET)
 - [x] El App Service está en estado Running
 - [x] La URL `*.azurewebsites.net` responde y carga la página de bienvenida
-- [x] Evidencias guardadas y enlazadas en el README
+
 
 ---
 
