@@ -51,7 +51,7 @@ Esto confirma que:
 ## Evidencias
 
 ### 01 – App Service creado (Overview)
-<img src="images/01-appservice-overview.png" width="800">
+<img src="images/app-lab19-antonio-01.png" width="800">
 
 Se muestra el panel del App Service, con el estado del servicio y la URL `*.azurewebsites.net`.
 
