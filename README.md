@@ -1,4 +1,4 @@
-# Lab 19 – Azure App Service (PaaS) – 
+# Lab 19 – Azure App Service (PaaS)
 
 ## Objetivo
 Desplegar una aplicación web en Azure App Service (PaaS) para publicar un endpoint web sin gestionar máquinas virtuales, sistema operativo ni parches.
